@@ -1,18 +1,16 @@
 package donpark.datapark.domain;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import donpark.datapark.dto.SignUpForm;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
 public class Member extends BaseTime {
 
   @Id
@@ -38,7 +36,20 @@ public class Member extends BaseTime {
   @Column
   private LocalDate birth;
 
-  @Column
-  private String gender;
+  @Enumerated(EnumType.STRING)
+  private Gender gender;
+
+  public static Member of(SignUpForm form) {
+    return Member.builder()
+        .loginId(form.getLoginId())
+        .loginPw(form.getLoginPw())
+        .email(form.getEmail())
+        .phone(form.getPhone())
+        .name(form.getName())
+        .birth(form.getBirth())
+        .gender(form.getGender())
+        .build();
+  }
+
 
 }

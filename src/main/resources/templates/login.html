@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Datapark - login</title>
+  <style>
+    .red {
+      color: #dc3545;
+      border-color: #dc3545;
+    }
+  </style>
+</head>
+<body>
+<h1>로그인</h1>
+<form th:action method="post" th:object="${loginForm}">
+  <input type="text" th:field="*{loginId}" placeholder="아이디">
+  <input type="password" th:field="*{loginPw}" th:errorclass="red"  placeholder="비밀번호">
+  <th:block th:if="${#fields.hasGlobalErrors()}" >
+    <div class="red" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+  </th:block>
+  <button type="submit">로그인</button>
+</form>
+<a href="#">아이디 찾기</a>
+<a href="#">비밀번호 찾기</a>
+<a href="/signup">회원가입</a>
+</body>
+</html>

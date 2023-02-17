@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Datapark - sign up</title>
+  <style>
+    .red {
+      color: red;
+      border-color: red;
+    }
+  </style>
+</head>
+<body>
+<h1>회원가입</h1>
+<form th:action method="post" th:object="${signUpForm}">
+  아이디 : <input type="text" th:field="*{loginId}"> <br>
+  <div th:errors="*{loginId}" th:errorclass="red"></div>
+  비밀번호 : <input type="password" th:field="*{loginPw}"> <br>
+  비밀번호 확인 : <input type="password" th:field="*{loginPwChk}"> <br>
+  <div th:errors="*{loginPwChk}" th:errorclass="red"></div>
+  이메일 : <input type="email" th:field="*{email}"> <br>
+  연락처 : <input type="text" th:field="*{phone}" placeholder="- 제외하고 입력할 것"> <br>
+  이름 : <input type="text" th:field="*{name}"> <br>
+  생일 : <input type="date" th:field="*{birth}"> <br>
+  성별 : <input type="radio" id="man" th:field="*{gender}" th:value="MAN">
+  <label for="man">남자</label>
+  <input type="radio" id="woman" th:field="*{gender}" th:value="WOMAN">
+  <label for="woman">여자</label>
+  <br>
+  <button>가입하기</button>
+</form>
+</body>
+</html>
