@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>글 작성</title>
+</head>
+<body>
+<form th:action="@{/write}" method="post" enctype="multipart/form-data">
+  <input type="file" name="file"> <br>
+  <input name="title" type="text" placeholder="title"> <br>
+  <textarea name="content" cols="30" rows="10" placeholder="content"></textarea> <br>
+  <button type="submit">작성하기</button>
+  <button th:onclick="|location.href='@{/docs}'|">취소</button>
+</form>
+</body>
+</html>

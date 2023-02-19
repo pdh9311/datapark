@@ -38,7 +38,7 @@ public class LoginController {
       bindingResult.reject("loginFail", null);
       return "login";
     }
-    // TODO: 로그인 성공 처리
+    // DONE: 로그인 성공 처리
     session.setAttribute(SessionConst.LOGIN_INFO, loginResult);
     return "redirect:" + redirectURI;
   }

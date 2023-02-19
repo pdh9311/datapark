@@ -1,7 +1,9 @@
 package donpark.datapark;
 
+import donpark.datapark.domain.Document;
 import donpark.datapark.domain.Gender;
 import donpark.datapark.domain.Member;
+import donpark.datapark.repository.DocumentRepository;
 import donpark.datapark.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -14,13 +16,13 @@ import java.time.LocalDate;
 public class InitDB {
 
   private final MemberRepository memberRepository;
+  private final DocumentRepository documentRepository;
 
   @PostConstruct
   public void init() {
     Member member = Member.builder()
-        .id(0L)
         .loginId("qwe")
-        .loginPw("qwe123")
+        .loginPw("qwe123!@#")
         .email("qwe@qwe.com")
         .phone("010-001-0010")
         .name("qwe")
@@ -28,5 +30,16 @@ public class InitDB {
         .gender(Gender.MAN)
         .build();
     memberRepository.save(member);
+
+    for (int i = 1; i <= 3; i++) {
+      Document document = Document.builder()
+          .title("title" + i)
+          .content("content" + i)
+          .hits(0L)
+          .member(member)
+          .build();
+      documentRepository.save(document);
+    }
+
   }
 }

@@ -31,9 +31,14 @@ public class MemberService {
     return memberRepository.findByLoginId(loginId);
   }
 
-
   public void signup(SignUpForm form) {
     Member member = Member.of(form);
     memberRepository.save(member);
   }
+
+  public Member findById(Long id) {
+    return memberRepository.findById(id)
+        .orElse(null);
+  }
+
 }

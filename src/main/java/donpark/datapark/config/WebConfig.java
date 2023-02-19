@@ -14,7 +14,7 @@ public class WebConfig implements WebMvcConfigurer {
         .order(1)
         .addPathPatterns("/**")
         .excludePathPatterns("/css/**", "*.ico", "/error")
-        .excludePathPatterns("/", "/login", "/signup"); // 세션이 없어도 접근가능한 uri
+        .excludePathPatterns("/", "/login", "/signup", "/docs"); // 세션이 없어도 접근가능한 uri
   }
 
 }

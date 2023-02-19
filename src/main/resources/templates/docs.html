@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Datapark - documents</title>
+  <style>
+    ul {
+      list-style: none;
+    }
+
+    li {
+      float: left;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+<h1>문서 목록</h1>
+
+<button th:onclick="|location.href='@{/write}'|">글 작성</button>
+
+<div th:each="doc : ${docs}">
+  <div>
+    <input type="hidden" th:value="${doc.id}">
+    <span>📄</span>
+    <a th:href="@{/docs/{id}(id = ${doc.id})}"><strong th:text="${doc.title}">title</strong></a>
+    <small th:text="${#temporals.format(doc.updatedTime, 'yyyy-MM-dd HH:mm:ss')}"></small>
+  </div>
+</div>
+
+<ul>
+  <li th:if="${pg.isPrev()}"><a th:href="@{/docs(page=${pg.prevPage})}" th:text="이전"></a></li>
+  <th:block th:each="num : ${#numbers.sequence(pg.frontPage, pg.endPage)}">
+    <li th:if="${num == pg.currPage}" th:text="${num}"></li>
+    <li th:if="${num != pg.currPage}">
+      <a th:href="@{/docs(page=${num})}" th:text="${num}"></a>
+    </li>
+  </th:block>
+  <li th:if="${pg.isNext()}"><a th:href="@{/docs(page=${pg.nextPage})}" th:text="다음"></a></li>
+</ul>
+</body>
+</html>
