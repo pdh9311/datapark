@@ -44,4 +44,8 @@ public class Document extends BaseTime {
         .build();
   }
 
+  public void update(String title, String content) {
+    this.title = title;
+    this.content = content;
+  }
 }

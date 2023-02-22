@@ -11,15 +11,17 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
-public class DocumentDto {
+public class DocsDto {
 
   private Long id;
+  private String icon;
   private String title;
   private LocalDateTime updatedTime;
 
-  public static DocumentDto of(Document document) {
-    return DocumentDto.builder()
+  public static DocsDto of(Document document) {
+    return DocsDto.builder()
         .id(document.getId())
+        .icon(document.getIcon().getPath())
         .title(document.getTitle())
         .updatedTime(document.getUpdatedTime())
         .build();

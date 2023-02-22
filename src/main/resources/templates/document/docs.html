@@ -22,9 +22,13 @@
 <div th:each="doc : ${docs}">
   <div>
     <input type="hidden" th:value="${doc.id}">
-    <span>📄</span>
+    <img th:src="@{${doc.icon}}" alt width="20" height="20">
     <a th:href="@{/docs/{id}(id = ${doc.id})}"><strong th:text="${doc.title}">title</strong></a>
     <small th:text="${#temporals.format(doc.updatedTime, 'yyyy-MM-dd HH:mm:ss')}"></small>
+    <form th:action="@{/docs/{id}(id=${doc.id})}" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <button>삭제</button>
+    </form>
   </div>
 </div>
 
