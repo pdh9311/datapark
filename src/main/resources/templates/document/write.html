@@ -1,16 +1,50 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="~{fragment/head::toastui_(~{::title}, ~{::link})}">
   <meta charset="UTF-8">
   <title>글 작성</title>
+  <!--  <link rel="stylesheet" href="/css/normalize.css">-->
+  <link rel="stylesheet" href="/css/write.css">
 </head>
 <body>
-<form th:action="@{/write}" method="post" enctype="multipart/form-data">
-  <input type="file" name="file"> <br>
-  <input name="title" type="text" placeholder="title"> <br>
-  <textarea name="content" cols="30" rows="10" placeholder="content"></textarea> <br>
-  <button type="submit">작성하기</button>
-  <button th:onclick="|location.href='@{/docs}'|">취소</button>
-</form>
+<div class="container">
+  <div class="top">
+<!--    <input type="file" id="pageIcon" name="pageIcon" accept="image/*">-->
+<!--    <label for="pageIcon">-->
+<!--      <img src="/icons/upload-e1e1e170.svg" alt="업로드 이미지">-->
+<!--    </label>-->
+    <input class="title" name="title" type="text" placeholder="TITLE">
+    <button>저장</button>
+    <button th:onclick="|location.href='@{/docs}'|">취소</button>
+  </div>
+  <div id="editor"></div>
+</div>
+<script src="/js/toast.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  const $save = document.querySelector('#save');
+  const $title = document.querySelector('.title');
+
+  const documentWrite = (event) => {
+    event.preventDefault();
+
+    const content = editor.getMarkdown();
+    axios.post(`http://localhost:8080/toast`, {
+      title: $title.textContent,
+      content: content,
+    }).then(function (response) {
+      console.log(response);
+      const document = response.data;
+      location.href = 'http://localhost:8080/toast/read?document=' + document;
+    }).catch(function (error) {
+      console.log(error);
+    });
+  };
+
+
+
+
+  $save.addEventListener('click', documentWrite);
+</script>
 </body>
 </html>

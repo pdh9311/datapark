@@ -38,3 +38,4 @@ out/
 
 ## etc ###
 /src/main/resources/static/icons/qwe/**
+/src/main/resources/static/docs/**

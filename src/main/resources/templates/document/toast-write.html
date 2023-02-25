@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragment/head::toastui(~{::title})}">
+  <meta charset="UTF-8">
+  <title>toast - write</title>
+</head>
+<body>
+
+<form th:action method="post">
+  <!--toast ui editor 요소-->
+  <div id="editor"></div>
+  <button id="save">Save</button>
+</form>
+<script src="/js/toast.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  const $save = document.querySelector('#save');
+
+  $save.addEventListener('click', function (event) {
+    event.preventDefault();
+    const content = editor.getMarkdown();
+    axios.post(`http://localhost:8080/toast`, {
+      content: content
+    }).then(function (response) {
+      console.log(response);
+      const document = response.data;
+      location.href = 'http://localhost:8080/toast/read?document=' + document;
+    }).catch(function (error) {
+      console.log(error);
+    });
+  });
+</script>
+</body>
+</html>

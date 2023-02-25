@@ -2,13 +2,122 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title th:replace="${title}">TITLE</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 </head>
 
 <head th:fragment="bootstrap_(title, links)">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title th:replace="${title}">TITLE</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <th:block th:replace="${links}"></th:block>
+</head>
+
+<head th:fragment="toastui(title)">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title th:replace="${title}">TITLE</title>
+  <!--toast Editor css-->
+  <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.css"/>
+  <!--toast chart plugin-->
+  <link rel="stylesheet" href="https://uicdn.toast.com/chart/latest/toastui-chart.min.css"/>
+  <!--toast code-syntax-highlight-->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css"/>
+  <link rel="stylesheet"
+        href="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight.min.css"/>
+  <!--toast color-syntax-->
+  <link rel="stylesheet"
+        href="https://uicdn.toast.com/tui-color-picker/latest/tui-color-picker.min.css"/>
+  <link rel="stylesheet"
+        href="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.css"/>
+
+  <!--toast table-merged-cell-->
+  <link rel="stylesheet"
+        href="https://uicdn.toast.com/editor-plugin-table-merged-cell/latest/toastui-editor-plugin-table-merged-cell.min.css"/>
+
+  <!--toast Editor CDN(Content Delivery Network)-->
+  <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+
+  <!--Chart-->
+  <script src="https://uicdn.toast.com/chart/latest/toastui-chart.min.js"></script>
+  <!--toast chart plugin-->
+  <script src="https://uicdn.toast.com/editor-plugin-chart/latest/toastui-editor-plugin-chart.min.js"></script>
+
+  <!--code-syntax-highlight-->
+  <script
+      src="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight-all.min.js"></script>
+
+  <!-- Color Picker -->
+  <script src="https://uicdn.toast.com/tui-color-picker/latest/tui-color-picker.min.js"></script>
+  <!--color-syntax-->
+  <script
+      src="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.js"></script>
+
+  <!--table-merged-cell-->
+  <script
+      src="https://uicdn.toast.com/editor-plugin-table-merged-cell/latest/toastui-editor-plugin-table-merged-cell.min.js"></script>
+
+  <!--uml-->
+  <script src="https://uicdn.toast.com/editor-plugin-uml/latest/toastui-editor-plugin-uml.min.js"></script>
+
+  <!--latex.js-->
+  <script src="https://cdn.jsdelivr.net/npm/latex.js@0.12.4/dist/latex.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/latex.js@0.12.4/dist/css/katex.min.css" rel="stylesheet">
+</head>
+
+<head th:fragment="toastui_(title,links)">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title th:replace="${title}">TITLE</title>
+  <th:block th:replace="${links}"></th:block>
+  <!--toast Editor css-->
+  <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.css"/>
+  <!--toast chart plugin-->
+  <link rel="stylesheet" href="https://uicdn.toast.com/chart/latest/toastui-chart.min.css"/>
+  <!--toast code-syntax-highlight-->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css"/>
+  <link rel="stylesheet"
+        href="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight.min.css"/>
+  <!--toast color-syntax-->
+  <link rel="stylesheet"
+        href="https://uicdn.toast.com/tui-color-picker/latest/tui-color-picker.min.css"/>
+  <link rel="stylesheet"
+        href="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.css"/>
+
+  <!--toast table-merged-cell-->
+  <link rel="stylesheet"
+        href="https://uicdn.toast.com/editor-plugin-table-merged-cell/latest/toastui-editor-plugin-table-merged-cell.min.css"/>
+
+  <!--toast Editor CDN(Content Delivery Network)-->
+  <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+
+  <!--Chart-->
+  <script src="https://uicdn.toast.com/chart/latest/toastui-chart.min.js"></script>
+  <!--toast chart plugin-->
+  <script src="https://uicdn.toast.com/editor-plugin-chart/latest/toastui-editor-plugin-chart.min.js"></script>
+
+  <!--code-syntax-highlight-->
+  <script
+      src="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight-all.min.js"></script>
+
+  <!-- Color Picker -->
+  <script src="https://uicdn.toast.com/tui-color-picker/latest/tui-color-picker.min.js"></script>
+  <!--color-syntax-->
+  <script
+      src="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.js"></script>
+
+  <!--table-merged-cell-->
+  <script
+      src="https://uicdn.toast.com/editor-plugin-table-merged-cell/latest/toastui-editor-plugin-table-merged-cell.min.js"></script>
+
+  <!--uml-->
+  <script src="https://uicdn.toast.com/editor-plugin-uml/latest/toastui-editor-plugin-uml.min.js"></script>
+
+  <!--latex.js-->
+  <script src="https://cdn.jsdelivr.net/npm/latex.js@0.12.4/dist/latex.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/latex.js@0.12.4/dist/css/katex.min.css" rel="stylesheet">
 </head>

@@ -1,11 +1,11 @@
 package donpark.datapark.controller;
 
 import donpark.datapark.constants.SessionConst;
-import donpark.datapark.domain.Member;
 import donpark.datapark.dto.*;
 import donpark.datapark.service.DocumentService;
 import donpark.datapark.service.MemberService;
 import donpark.datapark.util.Paging;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -14,6 +14,9 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.*;
+import java.util.UUID;
 
 @Slf4j
 @Controller
@@ -43,11 +46,18 @@ public class DocumentController {
     return "document/write";
   }
 
-  @PostMapping("/write")
+  /*@PostMapping("/writeV1")
   public String write(WriteForm form,
                       @SessionAttribute(name = SessionConst.LOGIN_INFO, required = false) MemberInfo memberInfo) {
     Member member = memberService.findById(memberInfo.getId());
     documentService.write(form, member);
+    return "redirect:/docs";
+  }*/
+
+  @PostMapping("/write")
+  public String write(WriteForm form,
+                      @SessionAttribute(name = SessionConst.LOGIN_INFO, required = false) MemberInfo memberInfo) {
+
     return "redirect:/docs";
   }
 
@@ -78,4 +88,76 @@ public class DocumentController {
     return "redirect:/docs/" + id;
   }
 
+  @GetMapping("/toast")
+  public String toastForm() {
+    return "document/toast-write";
+  }
+
+  @ResponseBody
+  @PostMapping("/toast")
+  public String toast(@RequestBody Test test) {
+
+    log.info("content={}", test.getContent());
+    String projectPath = System.getProperty("user.dir");
+    StringBuilder filePath = new StringBuilder();
+    filePath.append(projectPath)
+        .append(File.separator).append("src")
+        .append(File.separator).append("main")
+        .append(File.separator).append("resources")
+        .append(File.separator).append("static")
+        .append(File.separator).append("docs");
+
+    String filename = UUID.randomUUID().toString() + "_document.md";
+    try {
+      File file = new File(filePath.toString(), filename);
+      if (!file.exists()) {
+        file.createNewFile();
+      }
+      BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+      bw.write(test.content);
+      bw.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+      return "bad";
+    }
+    return filename;
+  }
+
+  @GetMapping("/toast/read")
+  public String toastReadForm(@RequestParam(required = false) String document, Model model) {
+    log.info("document={}", document);
+    String projectPath = System.getProperty("user.dir");
+    StringBuilder sb = new StringBuilder();
+    sb.append(projectPath)
+        .append(File.separator).append("src")
+        .append(File.separator).append("main")
+        .append(File.separator).append("resources")
+        .append(File.separator).append("static")
+        .append(File.separator).append("docs")
+        .append(File.separator).append(document);
+
+    StringBuilder content = new StringBuilder();
+    try {
+      File file = new File(sb.toString());
+
+      BufferedReader br = new BufferedReader(new FileReader(file));
+      String str;
+      while ((str = br.readLine()) != null) {
+        content.append(str).append('\n');
+      }
+      model.addAttribute("content", content);
+    } catch (IOException e) {
+      e.printStackTrace();
+      return "redirect:/";
+    }
+
+
+    return "document/toast-read";
+  }
+
+  @Data
+  static class Test {
+    private String content;
+  }
 }
+
